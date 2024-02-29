@@ -7,6 +7,8 @@ This repository provides a C++ example for performing inference with TensorRT.
 - Python 3.x
 - [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/index.html#)
 - CUDA Toolkit
+- PyTorch
+- ONNX
 
 ## Setup
 
