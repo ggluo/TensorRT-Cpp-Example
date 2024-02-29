@@ -27,6 +27,7 @@ This repository provides a C++ example for performing inference with TensorRT.
 
 3. Ensure that TensorRT and CUDA Toolkit are installed on your system and specify it according in the makefile.
     ```makefile
+    LDFLAGS = -L/path/to/TensorRT/lib
     INCLUDEDIRS = -I/path/to/TensorRT/include
     ```
 
@@ -35,6 +36,7 @@ This repository provides a C++ example for performing inference with TensorRT.
 To run the test script, execute the following commands:
 
 ```bash
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/TensorRT/lib
 bash run_test.sh
 ```
 
