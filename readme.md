@@ -1,6 +1,6 @@
-# C++ TensorRT Tiny Inference Example
+# C++/C TensorRT Tiny Inference Example
 
-This repository provides a C++ example for performing inference with TensorRT.
+This repository provides a C++ and C example for performing inference with TensorRT.
 
 ## Requirements
 
