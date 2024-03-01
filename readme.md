@@ -2,6 +2,8 @@
 
 This repository provides C++ and C example for performing inference with TensorRT.
 
+This is integrated into [BART](https://github.com/mrirecon/bart)
+
 ## Requirements
 
 - Python 3.x
