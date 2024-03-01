@@ -24,7 +24,7 @@ This is integrated into [BART](https://github.com/mrirecon/bart)
 2. Install onnx and torch if not:
 
     ```bash
-    pip install torch onnx
+    pip install torch onnx onnxscript
     ```
 
 3. Ensure that TensorRT and CUDA Toolkit are installed on your system and specify it according in the makefile.
