@@ -1,6 +1,6 @@
-# C++/C TensorRT Tiny Inference Example
+# C++/C TensorRT Inference Example
 
-This repository provides C++ and C example for performing inference with TensorRT.
+This repository provides C++ and C examples that use TensorRT to inference the models that are implement with Pytorch/JAX/Tensorflow.
 
 This is integrated into [BART](https://github.com/mrirecon/bart)
 
