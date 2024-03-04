@@ -1,7 +1,7 @@
 echo "Running all tests"
 
 echo "========export the onnx model=========="
-python data/export_model.py data/model.onnx
+python python/export_model.py data/model.onnx
 
 echo "==========compile the tensorRT inference code=========="
 make 
