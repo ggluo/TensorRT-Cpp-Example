@@ -7,7 +7,7 @@ This is integrated into [BART](https://github.com/mrirecon/bart)
 ## Requirements
 
 - Python 3.x
-- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/index.html#)
+- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar)
 - CUDA Toolkit
 - PyTorch
 - ONNX
@@ -27,7 +27,7 @@ This is integrated into [BART](https://github.com/mrirecon/bart)
     pip install torch onnx onnxscript
     ```
 
-3. Ensure that TensorRT and CUDA Toolkit are installed on your system and specify it according in the makefile.
+3. Ensure that [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar) and CUDA Toolkit are installed on your system and specify it according in the makefile.
     ```makefile
     LDFLAGS = -L/path/to/TensorRT/lib
     INCLUDEDIRS = -I/path/to/TensorRT/include
