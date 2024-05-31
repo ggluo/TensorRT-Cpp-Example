@@ -9,5 +9,8 @@ make
 echo "==========run the tensorRT inference code from C++ =========="
 ./main data/model.onnx data/first_engine.trt
 
+echo "==========use the existing engine file to run the tensorRT inference code from C++ =========="
+./main data/first_engine.trt
+
 echo "==========run the tensorRT inference code from C =========="
 ./main_c data/model.onnx data/first_engine.trt

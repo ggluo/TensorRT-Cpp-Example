@@ -9,6 +9,11 @@
 #include <memory>
 #include <cassert>
 #include <numeric>
+#include <vector>
+#include <complex>
+#include <sstream>
+#include <iterator>
+#include <limits>
 
 struct InferDeleter
 {
@@ -28,6 +33,8 @@ struct infer_params
     int batch_size;
     std::string save_engine;
     std::string load_engine;
+    infer_params(const std::string& wfile, int bsize, const std::string& efile, const std::string& tfile)
+        : weights_file(wfile), batch_size(bsize), save_engine(efile), load_engine(tfile) {}
 };
 
 inline int64_t volume(const nvinfer1::Dims& d)
@@ -51,48 +58,64 @@ using Severity = nvinfer1::ILogger::Severity;
 class Logger : public nvinfer1::ILogger
 {
 public:
-    explicit Logger(Severity severity = Severity::kWARNING)
-        : mReportableSeverity(severity)
+    //explicit Logger(Severity severity = Severity::kWARNING)
+      //  : reportableSeverity(severity)
+    //{}
+    Logger(Severity severity = Severity::kWARNING)
     {
+        const char* logLevel = std::getenv("TENSORRT_LOG_LEVEL");
+        if (logLevel)
+        {
+            std::string level(logLevel);
+            if (level == "INTERNAL_ERROR")
+                reportableSeverity = Severity::kINTERNAL_ERROR;
+            else if (level == "ERROR")
+                reportableSeverity = Severity::kERROR;
+            else if (level == "WARNING")
+                reportableSeverity = Severity::kWARNING;
+            else if (level == "INFO")
+                reportableSeverity = Severity::kINFO;
+            else if (level == "VERBOSE")
+                reportableSeverity = Severity::kVERBOSE;
+            else
+                reportableSeverity = Severity::kWARNING; // default level
+        }
+        else
+        {
+            reportableSeverity = severity;
+        }
     }
 
-    void log(Severity severity, const char* msg) noexcept override
+     void log(Severity severity, const char* msg) noexcept override
     {
-        std::cout << "[TRT] " << std::string(msg) << std::endl;
+        if (severity <= reportableSeverity)
+        {
+            switch (severity)
+            {
+                case Severity::kINTERNAL_ERROR: std::cerr << "INTERNAL_ERROR: "; break;
+                case Severity::kERROR: std::cerr << "ERROR: "; break;
+                case Severity::kWARNING: std::cerr << "WARNING: "; break;
+                case Severity::kINFO: std::cout << "INFO: "; break;
+                case Severity::kVERBOSE: std::cout << "VERBOSE: "; break;
+                default: std::cout << "UNKNOWN: "; break;
+            }
+            std::cout << msg << std::endl;
+        }
     }
 
 
     void setReportableSeverity(Severity severity) noexcept
     {
-        mReportableSeverity = severity;
+        reportableSeverity = severity;
     }
     Severity getReportableSeverity() const
     {
-        return mReportableSeverity;
+        return reportableSeverity;
     }
 
 private:
-    
-    static const char* severityPrefix(Severity severity)
-    {
-        switch (severity)
-        {
-        case Severity::kINTERNAL_ERROR: return "[F] ";
-        case Severity::kERROR: return "[E] ";
-        case Severity::kWARNING: return "[W] ";
-        case Severity::kINFO: return "[I] ";
-        case Severity::kVERBOSE: return "[V] ";
-        default: assert(0); return "";
-        }
-    }
 
-
-    static std::ostream& severityOstream(Severity severity)
-    {
-        return severity >= Severity::kINFO ? std::cout : std::cerr;
-    }
-
-    Severity mReportableSeverity;
+    Severity reportableSeverity;
 };
 
 
@@ -141,28 +164,13 @@ inline void safeCudaFree(void* deviceMem) {
     CUDA_CHECK(cudaFree(deviceMem));
 }
 
-inline bool load_engine(){
+bool load_engine(const std::string& fileName, trt_unique_ptr<nvinfer1::ICudaEngine>& m_engine,
+ trt_unique_ptr<nvinfer1::IRuntime>&m_runtime, trt_unique_ptr<nvinfer1::IExecutionContext>& m_context, std::unique_ptr<Logger>& m_logger);
 
-}
+bool save_engine(const nvinfer1::ICudaEngine& engine, std::string const& fileName, std::ostream& err);
 
-inline bool save_engine(const nvinfer1::ICudaEngine& engine, std::string const& fileName, std::ostream& err)
-{
-    std::ofstream engineFile(fileName, std::ios::binary);
-    if (!engineFile)
-    {
-        err << "Cannot open engine file: " << fileName << std::endl;
-        return false;
-    }
+void write_cfl(const std::string& filename, const std::vector<std::complex<float>>& array, const std::vector<int>& dims);
 
-    std::unique_ptr<nvinfer1::IHostMemory> serializedEngine{engine.serialize()};
-    if (serializedEngine == nullptr)
-    {
-        err << "Engine serialization failed" << std::endl;
-        return false;
-    }
-
-    engineFile.write(static_cast<char*>(serializedEngine->data()), serializedEngine->size());
-    return !engineFile.fail();
-}
+void read_cfl(const std::string& filename, std::vector<std::complex<float>>& array, std::vector<int>& dims);
 
 #endif

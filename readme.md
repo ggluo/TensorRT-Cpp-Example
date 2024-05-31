@@ -97,3 +97,5 @@ This code performs the following steps:
 ## TODO
 1. memory leakage check with valgrind
 2. add c_connector
+3. load engine from file
+4. gaussian blur

@@ -69,6 +69,7 @@ bool trt_infer::build()
     else
     {
         std::cout << "Loading engine from file: " << m_params.load_engine << std::endl;
+        load_engine(m_params.load_engine, m_engine, m_runtime, m_context, m_logger);
     }
 
     if (!m_params.save_engine.empty())

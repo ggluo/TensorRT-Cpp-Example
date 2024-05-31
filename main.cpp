@@ -1,14 +1,31 @@
 #include "trt.h"
 #include <iostream>
+#include <cstring>
+bool is_trt_available(char *path) {
+    char *dot = strchr(path, '.');
+    if (dot != NULL) 
+        if (strcmp(dot, ".trt") == 0)
+            return true;
+    return false;
+}
 
 int main(int argc, char** argv) {
     std::cout << "Hello World from TensorRT" << std::endl;
-    if (argc < 3) {
-        std::cout << "Usage: " << argv[0] << " <path to weights file>  <path to save engine>" << std::endl;
+    if (argc < 2) {
+        std::cout << "Usage: " << argv[0] << " <path to weights file>  [path to save engine] " << std::endl;
         return 1;
     }
-    infer_params params{argv[1], 1,  argv[2], ""}; 
-    trt_infer trt(params); // Added missing object initialization
+
+    bool load_engine = is_trt_available(argv[1]);
+    
+    auto params = std::make_unique<infer_params>(
+        load_engine ? "" : argv[1], // Path to weights file if provided, empty string otherwise
+        1,                         // Batch size (assuming a constant value of 1)
+        argc>2 ? argv[2] : "",            // Path to save engine (last argument)
+        load_engine ? argv[1] : ""  // Path to TRT file if provided, empty string otherwise
+    );
+
+    trt_infer trt(*params); // Added missing object initialization
     trt.build();
 
     printf("==== inference without cudastream =====\n");
