@@ -17,8 +17,8 @@ This is integrated into [BART](https://github.com/mrirecon/bart)
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/ggluo/TensorRT-Tiny-Cpp-Example.git
-    cd TensorRT-Tiny-Cpp-Example
+    git clone https://github.com/ggluo/TensorRT-Cpp-Example.git
+    cd TensorRT-Cpp-Example
     ```
 
 2. Install onnx and torch if not:
