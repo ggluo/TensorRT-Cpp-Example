@@ -1,7 +1,7 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wno-deprecated -Wfloat-conversion
+CXXFLAGS = -std=c++14 -Wall -Wno-deprecated-declarations -Wfloat-conversion
 DEBUGFLAGS = -DDEBUG
-LDFLAGS = -L/home/gluo/local_lib/TensorRT-8.6.1.6/lib
+LDFLAGS = -L/home/gluo/local_lib/TensorRT-8.6.1.6/lib -Wno-deprecated-declarations
 LDLIBS = -lnvinfer -lnvonnxparser -lcudart -lnvinfer_plugin
 
 # Add the directory containing NvInfer.h to the include path
