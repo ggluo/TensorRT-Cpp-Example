@@ -18,4 +18,8 @@ echo "==========run the tensorRT inference code from C =========="
 echo "=========run GaussianBlur test=========="
 python python/gaussian_blur_pytorch.py data/grd pytorch_blurred data/blur.onnx
 ./gaussian_blur data/blur.onnx data/blur_engine.trt data/grd data/output
-python python/utils.py data/output tensorRT_blurred
+python python/utils.py data/output tensorRT_blurred_pytorch
+
+python python/gaussian_blur_tf.py data/grd tf_blurred data/blur.onnx
+./gaussian_blur data/blur.onnx data/blur_engine.trt data/grd data/output
+python python/utils.py data/output tensorRT_blurred_tf
