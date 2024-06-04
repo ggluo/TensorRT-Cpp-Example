@@ -85,6 +85,7 @@ bool trt_infer::build()
     }
     create_device_io_buffer();
     m_builder.reset(nullptr);
+    return true;
 }
 
 void trt_infer::create_device_io_buffer()
