@@ -22,4 +22,23 @@ def float2cplx(float_in):
     
 def cplx2float(cplx_in):
     return np.array(np.stack((cplx_in.real, cplx_in.imag), axis=-1), dtype='float32')
-    
+
+
+# read cfl file and plot it as image
+import matplotlib.pyplot as plt
+import sys
+
+def main(cfl, img_path):    
+        input_tensor = readcfl(cfl).squeeze()
+        plt.imshow(abs(input_tensor), cmap="gray")
+        plt.savefig(img_path)
+
+if __name__ == "__main__":
+    # parse command line arguments
+    if len(sys.argv) != 3:
+        print("Usage: python utils.py <cfl> <save_img_path>")
+        sys.exit(1)
+
+    cfl = sys.argv[1]
+    img_path = sys.argv[2]
+    main(sys.argv[1], sys.argv[2])

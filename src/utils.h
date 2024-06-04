@@ -169,8 +169,10 @@ bool load_engine(const std::string& fileName, trt_unique_ptr<nvinfer1::ICudaEngi
 
 bool save_engine(const nvinfer1::ICudaEngine& engine, std::string const& fileName, std::ostream& err);
 
+std::vector<int> getDimsFromFile(const std::string& filename);
+
 void write_cfl(const std::string& filename, const std::vector<std::complex<float>>& array, const std::vector<int>& dims);
 
-void read_cfl(const std::string& filename, std::vector<std::complex<float>>& array, std::vector<int>& dims);
+std::vector<std::complex<float>> read_cfl(const std::string& filename, std::vector<int>& dims);
 
 #endif
