@@ -1,4 +1,4 @@
-# TensorRT C/C++ Inference Example
+# TensorRT C/C++ Inference
 
 This repository provides C++ and C examples that use TensorRT to inference the models that are implement with Pytorch/JAX/Tensorflow.
 
