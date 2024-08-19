@@ -18,7 +18,7 @@ void buildTRT(handle handle_t) {
 
 void executeTRT(handle handle_t, const std::vector<float>& input, int input_idx, std::vector<float>& output, int output_idx) {
     trt_infer* trt = reinterpret_cast<trt_infer*>(handle_t);
-    (trt)->CopyFromHostToDevice({0.5f, -0.5f, 1.0f}, input_idx, nullptr);
+    (trt)->CopyFromHostToDevice(input, input_idx, nullptr);
     (trt)->infer();
     (trt)->CopyFromDeviceToHost(output, output_idx, nullptr);
 }
