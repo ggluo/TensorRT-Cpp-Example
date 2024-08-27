@@ -11,6 +11,7 @@ This is integrated into [BART](https://github.com/mrirecon/bart)
 - CUDA Toolkit
 - PyTorch
 - ONNX
+- tf2onnx
 
 ## Setup
 
@@ -44,7 +45,7 @@ bash run_test.sh
 
 This script performs the following steps:
 
-1. Exports the ONNX model: `python data/export_model.py data/model.onnx`
+1. Exports the ONNX model: `python python/export_model.py data/model.onnx`
 2. Compiles the TensorRT inference code: `make`
 3. Runs the TensorRT inference code: `./main data/model.onnx data/first_engine.trt`
 
@@ -94,8 +95,12 @@ This code performs the following steps:
 5. Copies output data from the device to the host.
 6. Prints the output.
 
+## Export models
+
+The folder [`python`](python) includes scripts for exporting models, which are created with Pytorch/JAX/Tensorflow, to `onnx` format. You can customize them for exporting your own models if needed.
+
 ## TODO
-1. memory leakage check with valgrind
-2. add c_connector
-3. load engine from file
-4. gaussian blur
+- [ ] memory leakage check with valgrind
+- [x] add c_connector
+- [x] load engine from file
+- [x] gaussian blur
