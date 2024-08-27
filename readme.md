@@ -36,7 +36,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/TensorRT/lib
 bash run_all.sh
 ```
 
-This script performs the following steps:
+The script [`run_all.sh`](run_all.sh) performs the following steps:
 
 1. Exports the ONNX model: `python python/export_model.py data/model.onnx`
 2. Compiles the TensorRT inference code: `make`
