@@ -23,7 +23,7 @@ This repository provides C++ and C examples that use TensorRT to inference the m
 2. Install onnx and torch if not:
 
     ```bash
-    pip install torch onnx onnxscript
+    pip install torch onnx onnxscript tf2onnx
     ```
 
 3. Ensure that [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar) and CUDA Toolkit are installed on your system and specify it according in the makefile.
