@@ -32,13 +32,13 @@ This repository provides C++ and C examples that use TensorRT to inference the m
     INCLUDEDIRS = -I/path/to/TensorRT/include
     ```
 
-## Running the Test
+## Running all tests
 
 To run the test script, execute the following commands:
 
 ```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/TensorRT/lib
-bash run_test.sh
+bash run_all.sh
 ```
 
 This script performs the following steps:
