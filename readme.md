@@ -4,12 +4,7 @@ This repository provides C++ and C examples that use TensorRT to inference the m
 
 ## Requirements
 
-- Python 3.x
-- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar)
-- CUDA Toolkit
-- PyTorch
-- ONNX
-- tf2onnx
+- Python 3.x | [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar) | PyTorch | Tensorflow | ONNX | tf2onnx | JAX | CUDA Toolkit
 
 ## Setup
 
@@ -20,10 +15,10 @@ This repository provides C++ and C examples that use TensorRT to inference the m
     cd TensorRT-Cpp-Example
     ```
 
-2. Install onnx and torch if not:
+2. Install onnx and tf2onnx if not:
 
     ```bash
-    pip install torch onnx onnxscript tf2onnx
+    pip install onnx onnxscript tf2onnx
     ```
 
 3. Ensure that [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar) and CUDA Toolkit are installed on your system and specify it according in the makefile.
