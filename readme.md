@@ -2,8 +2,6 @@
 
 This repository provides C++ and C examples that use TensorRT to inference the models that are implement with Pytorch/JAX/Tensorflow.
 
-This is integrated into [BART](https://github.com/mrirecon/bart)
-
 ## Requirements
 
 - Python 3.x
